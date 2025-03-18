@@ -1,23 +1,16 @@
 import streamlit as st
-from PIL import Image
+import pandas as pd
 
-st.title("This is My BMI Calculator")
+st.title("BMI Calculator")
+height=st.slider("Enter you height (in cm):",100,250,175)
+weight=st.slider("Enter you weight (in kg):",40,200,70)
 
-image_path = "bmi.png"  
+bmi=weight/(height/100*2)
 
+st.success(f"your BMI is {bmi:.2f}🎉🎉")
 
-image = Image.open(image_path)
-
-
-st.image(image)
-
-
-weight = st.number_input("Enter your Weight in KG", step=0.1)
-height = st.number_input("Enter your Height in Meters")
-
-
-if height > 0:
-    bmi = weight / (height ** 2)
-    st.success(f"🎉Your BMI is {bmi:.2f}")
-else:
-    st.error("🧨Height must be greater than 0")
+st.write("### BMI Categories ###")
+st.write("-Underwright: BMI less than 18.5")
+st.write("-Normal weight: BMI between 18.5 and 24.9")
+st.write("-Overweight: BMI between 25 and 29.9")
+st.write("-Obesity: BMI 30 or greater")
